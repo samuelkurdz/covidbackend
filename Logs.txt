@@ -1,0 +1,2 @@
+Method    RequestPath   Status   Response Time
+GET     '/api/json'     200      18.3765ms

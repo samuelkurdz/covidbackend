@@ -1,36 +1,50 @@
 const express = require('express');
+const fs = require('fs');
 const Router = express.Router();
+
 const js2xmlparser = require('js2xmlparser');
+// const responseTime = require('response-time');
+
 
 const estimator = require('./estimator');
 
 let xmlDOc = '';
 let estimations = '';
+Router.get('/', (req, res)=> {
+res.json({"Message": "Welcome"});
+});
 
-Router.post('/', (req,res) => {
+Router.post('/api', (req, res, time) => {
   const data = req.body;
   estimations = estimator(data);
   xmlDOc = js2xmlparser.parse("Estimations", estimations);
   res.status(200).json({"estimations": estimations});
+
+
 });
 
-Router.get('/json', (req,res) => {
+Router.get('/api/json', (req,res) => {
   res.status(200).json({"estimations": estimations});
 })
 
-Router.get('/xml', (req, res) => {  
+Router.get('/api/xml', (req, res) => {  
   res.type("application/xml");
   res.send(xmlDOc);
     console.log(res.getHeaders());
 });
 
+Router.get('/api/logs', async (req, res) => {
+  const logs = fs.readFileSync('./Logs.txt', 'utf8');
+  console.log(logs);
+  
+  res.set({
+    'Content-Type': 'text/plain',
+  }).send(logs);
+});
+
+
 module.exports = Router;
 
-
-
-
-  // console.log(req.headers);
-  // console.log(res.getHeaders());
 
 
 
