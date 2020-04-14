@@ -1,2 +1,5 @@
-Method    RequestPath   Status   Response Time
-GET     '/api/json'     200      18.3765ms
+
+POST     '/api/v1/on-covid-19'    200      303.914ms
+GET     '/api/v1/on-covid-19/xml'    200      30.268ms
+GET     '/api/v1/on-covid-19/json'    200      12.745ms
+GET     '/api/v1/on-covid-19/logs'    200      89.693ms
