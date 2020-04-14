@@ -14,7 +14,7 @@ app.use(cors());
 app.use(responseTime((req, res, time) => {
   // console.log(`${req.method}, ${req.url}, ${time}`);
 
-  let content = `\n${req.method}     '${req.url}'    ${res.statusCode}      ${Math.trunc((time*10).toFixed(3))}ms`;
+  let content = `\n${req.method}     '${req.url}'    ${res.statusCode}      ${Math.trunc((time*100).toFixed(3))}ms`;
   
   fs.appendFile('./Logs.txt', content, err =>{
     if(err) {
